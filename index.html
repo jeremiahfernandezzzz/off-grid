@@ -1,0 +1,989 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<link rel="icon" type="image/png" href="favicon.ico" sizes="16x16">  
+		<meta content='maximum-scale=1.0, user-scalable=0' name='viewport' />-
+		<title>Off grid</title>
+	</head>
+	<body>
+
+		<div class="hit-bar"><span class="hit-points"></span></div>
+		<div class="game">
+			<div class="randomizer"></div>
+
+			<div class="actor"><div class="rotator">|.|</div></div>
+		</div>
+		<div class="console"></div>
+		<div class="beacon-count">beacons &#x2193</div>
+		<div class="console2">
+			
+			<div id="b93" style='opacity: .1; color: red;background-color: red'>aa</div>
+			<div id="b94" style='opacity: .1; color: orange;background-color: orange'>aa</div>
+			<div id="b95" style='opacity: .1; color: yellow;background-color: yellow'>aa</div>
+			<div id="b96" style='opacity: .1; color: green;background-color: green'>aa</div>
+			<div id="b97" style='opacity: .1; color: blue;background-color: blue'>aa</div>
+			<div id="b98" style='opacity: .1; color: indigo;background-color: indigo'>aa</div>
+			<div id="b99" style='opacity: .1; color: violet;background-color: violet'>aa</div>
+				
+		</div>
+		<div class="console1"></div>
+		<div class="console3"></div>
+		
+		<div class="mobile left"></div>
+		<div class="mobile right"></div>
+	</body>
+</html>
+<style>
+
+	@keyframes boom{
+		0% { transform: scale(1); }
+		10% { transform: scale(2); }
+		20% { transform: scale(3); }
+		30% { transform: scale(4); }
+		40% { transform: scale(5); }
+		50% { transform: scale(6); }
+		60% { transform: scale(7); }
+		70% { transform: scale(8); }
+		80% { transform: scale(9); }
+		90% { transform: scale(10); }
+	}
+	@keyframes blink {
+		0% { opacity: .5; }
+		10% { opacity: .15; }
+		20% { opacity: .25; }
+		30% { opacity: .35; }
+		40% { opacity: .45; }
+		50% { opacity: .55; }
+		60% { opacity: .65; }
+		70% { opacity: .75; }
+		80% { opacity: .85; }
+		90% { opacity: .95; }
+	}
+
+	@keyframes beacon {
+		0% { background-color: red; }
+		15% { background-color:orange; }
+		30% { background-color: yellow; }
+		45% { background-color: green; }
+		60% { background-color: blue; }
+		75% { background-color: indigo; }
+		90% { background-color: violet; }
+	}
+
+	@font-face {
+		font-family: "Hexagon";
+		src: url("Hexagon.ttf");
+	}
+	
+	.mobile {
+		position: absolute;
+		width: 40%;
+		height : 100%;
+	}
+	
+	.left {
+		left: 0%;
+	}
+	
+	.right {
+		right: 0%;
+	}
+
+	body {
+		overflow: hidden;
+		text-align: center;
+		justify-content: center;
+		background-color: #04050D;
+		  -webkit-user-select: none;  /* Chrome all / Safari all */
+		  -moz-user-select: none;     /* Firefox all */
+		  -ms-user-select: none;      /* IE 10+ */
+		  user-select: none;          /* Likely future */   
+	}
+	
+	.console {
+		position: fixed;
+		top: 15px;
+		right: 15px;
+		padding: 20px;
+		background: rgba(255, 255, 255, .2);
+		z-index: 99;
+		visibility: visible;
+		font-family: "Consolas";
+		font-size: 15pt;
+		color: grey;
+	}
+
+	.beacon-count {
+		position: fixed;
+		top: 15px;
+		left: 15px;
+		padding: 10px;
+		background: rgba(255, 255, 255, .5);
+		z-index: 99;
+		visibility: visible;
+		font-family: "Consolas";
+		font-size: 15pt;
+
+	}
+	.console2 {
+		position: fixed;
+		top: 80px;
+		left: 80px;
+		padding: 10px;
+		width: 35px;
+		background: rgba(255, 255, 255, .5);
+		z-index: 99;
+		visibility: visible;
+		font-family: "Consolas";
+		font-size: 20pt;
+	}
+
+	
+	.console3 {
+		position: fixed;
+  		/* margin: 0 auto; */
+		padding: 20px;
+		background: rgba(255, 255, 255, .2);
+		z-index: 99;
+		visibility: visible;
+		font-family: "Consolas";
+		font-size: 15pt;
+		color: white;
+		background-color: black;
+		/* display: none; */
+	}
+	
+	.console1 {
+		position: fixed;
+		bottom: 15px;
+		right: 15px;
+		padding: 20px;
+		background: rgba(255, 255, 255, .2);
+		z-index: 99;
+		visibility: hidden;
+		font-family: "Consolas";
+		font-size: 15pt;
+		color: grey;
+	}
+	
+	.hit-bar {
+		position: fixed;
+		top: 80px;
+		left: 15px;
+		width: 45px;
+		height: 300px;
+		z-index: 99;
+		font-family: "Consolas";
+		font-size: 20pt;
+		opacity: .5;
+	}
+
+	.hit-points {
+		position: absolute;
+		bottom: 0;
+		left:7px;
+	}
+
+	.random-element {
+		position: absolute;
+		color: #C9A957;
+		font-family: "lucida console";
+		font-size: 20pt;
+		height: 10px;
+		width: 10px;
+		opacity: .5;
+		border: solid 1px;
+	}
+	
+	.sample-element {
+		position: relative;
+		color: #C9A957;
+		background: rgba(255, 255, 255, 0.15);
+		font-family: "lucida console";
+		font-size: 20pt;
+		height: 40px;
+		width: 80px;
+		opacity: .5;
+	}
+	
+	.arrow {
+		position: absolute;
+		color: yellow;
+	}
+	
+	.actor {
+		position: absolute;
+		left: 1%;
+		top: 96%;
+		width: 20px;
+		height: 20px;
+		font-size: 10pt;
+		color:rgba(150, 300, 550, 1);
+		font-family: "lucida console";
+	}
+	
+	.game {
+		position: absolute;
+		background-color: #060712;
+
+		left: 13%;
+		top: 13%;
+		width: 1500px;
+		height:750px;
+		transform: scale(3);
+		animation: color-change 15s infinite;
+	}
+	
+	
+	
+</style>
+
+<script>
+	function tableCreate() {
+		var game = document.querySelector('.game');
+		var tbl = document.createElement('table');
+		tbl.style.width = '100%';
+		tbl.style.height = '100%';
+		tbl.style.border = 'grey solid 1px';
+		tbl.style.opacity = ".1";
+
+		var tbdy = document.createElement('tbody');
+		for (var i = 0; i < 10; i++) {
+			var tr = document.createElement('tr');
+			for (var j = 0; j < 20; j++) {
+					var td = document.createElement('td');
+					td.appendChild(document.createTextNode(''));
+					td.style.border = "grey solid 1px";
+					tr.appendChild(td);
+			}
+			tbdy.appendChild(tr);
+		}
+		tbl.appendChild(tbdy);
+		game.appendChild(tbl);
+	}
+
+	var angle = 0;
+	var x_velocity = 0;
+	var y_velocity = 0;
+	var x_translation = 0;
+	var y_translation = 0;
+	var map = {};
+	var freeze_controls = false;
+	var current_el = 0;
+	var speedCoefficient = 1;
+	var caught = 0;
+	var hit_points = 99;
+	
+	var touchleft = false;
+	var touchright = false;
+	var positionUponMeetingX = 0;
+	var positionUponMeetingY = 0;
+	
+	var time = 0;
+
+	
+	function go(){
+		if (freeze_controls == false) {	
+			time += .01;
+		}
+
+        for (var i = 0; i < 100; i ++){
+		
+			if (i == 39 || i == 68) {
+				if (map[i] == true){
+					angle -= speedCoefficient*2;
+				}
+			}
+			if (i == 37 || i == 65) {
+				if (map[i] == true){
+					angle += speedCoefficient*2;
+				}
+			}
+
+			if (i == 38  || i == 87) {
+				if (map[i] == true){
+					x_translation -= x_velocity;
+					y_translation -= y_velocity;
+					hit_points -= .025*speedCoefficient;
+					document.querySelector(".hit-bar").style.animation = 'blink 2s infinite';
+				} else {
+					document.querySelector(".hit-bar").style.animation = '';
+				}
+			}
+		}
+		
+		
+		x_velocity = speedCoefficient*(Math.cos( (90-angle)/(180/Math.PI) ));
+		y_velocity = speedCoefficient*(Math.cos(angle/(180/Math.PI)));
+		document.querySelector(".actor .rotator").style.transform = "rotate(" + angle*-1 + "deg)";
+		document.querySelector(".actor").style.transform = "translate(" + x_translation + "px, " + y_translation + "px)";
+		document.querySelector(".game").style.transformOrigin = (x_translation-50)*1.3 + "px " + (y_translation+700)*1.3 + "px";
+		document.querySelector(".hit-points").innerHTML = "<span style='font-size:10pt;'>fuel<br/></span>" + Math.round(hit_points);
+		if (Math.round(hit_points) < 30) {
+			document.querySelector(".hit-points").style.color = 'grey';
+		} else {
+			document.querySelector(".hit-points").style.color = 'black';
+		}
+
+			document.querySelector(".hit-bar").style.height = hit_points * 3;
+			document.querySelector(".hit-bar").style.background = 'rgba(100,' + parseInt(hit_points*3) + ', 00, 1)';
+			document.querySelector(".actor").style.color = 'rgba(150, 300, 550, 1)';
+
+
+        document.querySelector(".hit-bar").style.opacity = '.5';
+		document.querySelector(".actor").style.opacity = '1';
+
+		if (document.querySelector(".console").innerHTML == "") {
+			document.querySelector(".console").style.display = "none";
+		} else {
+			document.querySelector(".console").style.display = "";
+		}
+
+		
+		if (hit_points < 99) {
+			hit_points += .02;
+		}
+		
+		if (hit_points <= 0) {
+			
+			freeze_controls = true;
+			map[39] = true;
+			
+			window.setTimeout(function() {
+				var message = "";
+				if (parseInt(time).toString().slice(-1)[0] == 0 || parseInt(time).toString().slice(-1)[0] == 5){
+					message = "wasted";
+				}
+
+				if (parseInt(time).toString().slice(-1)[0] == 1 || parseInt(time).toString().slice(-1)[0] == 6){
+					message = "dammit";
+				}
+
+				if (parseInt(time).toString().slice(-1)[0] == 2 || parseInt(time).toString().slice(-1)[0] == 7){
+					message = "aw snap";
+				}
+
+				if (parseInt(time).toString().slice(-1)[0] == 3 || parseInt(time).toString().slice(-1)[0] == 8){
+					message = "you dead";
+				}
+				
+				if (parseInt(time).toString().slice(-1)[0] == 4 || parseInt(time).toString().slice(-1)[0] == 9){
+					message = "r.i.p.";
+				}
+				document.querySelector(".console3").style.display = "";
+				document.querySelector(".console3").innerHTML = "<span style='background-color:black; padding: 5px;'>" + message + "<br/><br/>you ran out of fuel <br/><br/>" + parseInt(time) + " seconds</span>";
+			}, 2000)
+
+			window.setTimeout(function() {
+				location.reload();
+			}, 5000)
+		}
+		
+	}
+		
+	function mapKeyDown(event) {
+		if (freeze_controls == false) {
+			map[event.keyCode] = true;
+		}
+	}
+
+	function mapKeyUp(event) {
+		map[event.keyCode] = false;
+	}
+
+	window.addEventListener("keyup", mapKeyUp, false);
+	window.addEventListener("keydown", mapKeyDown, false);
+
+	window.addEventListener("keydown", function(e) {
+		if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+			e.preventDefault();
+		}
+	}, false);
+	
+	window.addEventListener("touchmove", function(e) {
+			e.preventDefault();
+	}, false);
+	
+	function shuffle(arra1) {
+		var ctr = arra1.length, temp, index;
+
+		while (ctr > 0) {
+			index = Math.floor(Math.random() * ctr);
+			ctr--;
+			temp = arra1[ctr];
+			arra1[ctr] = arra1[index];
+			arra1[index] = temp;
+		}
+		return arra1;
+	}	
+	
+	var posX = [];
+	var valX = 0;
+	var combinations = [];
+	
+	
+	for (ctr = 0; valX <= 7500;  ctr++) {
+		posX[ctr] = valX;
+		valX += 75;
+	}
+	
+	var aw = 0;
+	for (ctra = 1; ctra <= 9; ctra++) {
+		for (ctrb = 2; ctrb <= 19; ctrb++) {
+			combinations[aw] = [posX[ctra], posX[ctrb]];
+			aw ++;
+		}	
+	}
+	
+	shuffle(combinations);
+
+	var rando = [];
+	
+	function random_debris(ctr) {
+	
+		this.neutral = false;
+		this.ctr = ctr;
+		this.top = combinations[ctr][0];	
+		this.left = combinations[ctr][1];
+		this.width = 15;
+		this.height = 15;
+		this.x_translate = 0;
+		this.y_translate = 0;
+		this.content = ".";
+		this.id = 'el' + ctr;
+		this.class = 'random-debris';
+		this.rotateBy = 0;
+
+        if (this.ctr == 93) {
+			this.content = "";
+            this.color = "red";
+        }
+
+        if (this.ctr == 94) {
+			this.content = "";
+            this.color = "orange";
+        }
+
+        if (this.ctr == 95) {
+			this.content = "";
+            this.color = "yellow";
+        }
+
+        if (this.ctr == 96) {
+			this.content = "";
+            this.color = "green";
+        }
+
+        if (this.ctr == 97) {
+			this.content = "";
+            this.color = "blue";
+        }
+
+		if (this.ctr == 98) {
+			this.content = "";
+			this.color = "indigo";
+		}
+
+		if (this.ctr == 99) {
+			this.content = "";
+			this.color = "violet";
+		}
+
+        if (this.ctr == 91) {
+            this.opacity = "1";
+            this.content = "";
+            this.color = "black";
+            this.width = 20;
+            this.height = 20;
+        }
+		
+		if (this.ctr > 92 && this.ctr < 100) {
+			this.width = 10;
+			this.height = 10;
+		}
+
+		var new_el = document.createElement("span"); 
+		new_el.setAttribute('class', 'random-element'); 
+		new_el.setAttribute('id', this.id);
+		new_el.setAttribute('style', "width: " + this.width + "px; height: " + this.height + "px; position: absolute; top: " + this.top + "px; left: " + this.left + "px; color: " + this.color + "; background-color: " + this.color + ";");
+		
+		var text = document.createTextNode(this.content); 
+		
+		new_el.appendChild(text);
+		
+		var randomizer = document.querySelector(".randomizer"); ; 
+		document.querySelector(".game").insertBefore(new_el, randomizer); 
+		
+	}
+	
+	for (var ctr = 60; ctr <= 99; ctr++) {
+		rando[ctr] = new random_debris(ctr);
+	}
+
+    function actorToElementCollision(ac) {
+        for (var ctr = 60; ctr <= 91; ctr++) {
+
+            var ac_top = document.querySelector(".actor").getBoundingClientRect().top;
+            var ac_bottom = document.querySelector(".actor").getBoundingClientRect().bottom;
+
+            var ac_left = document.querySelector(".actor").getBoundingClientRect().left;
+            var ac_right = document.querySelector(".actor").getBoundingClientRect().right;
+
+            var el = document.querySelector("#el" + ctr + "");
+            var el_top = el.getBoundingClientRect().top;
+            var el_bottom = el.getBoundingClientRect().bottom;
+
+            var el_left = el.getBoundingClientRect().left;
+            var el_right = el.getBoundingClientRect().right;
+
+			if (ctr == 91 && rando[93].neutral == true && rando[94].neutral == true && rando[95].neutral == true && rando[96].neutral == true && rando[97].neutral == true && rando[98].neutral == true && rando[99].neutral == true) {
+				
+				if ( ( ( (ac_left < ( el_right ) ) && (ac_right > el_right) )
+					&&
+					( ( (ac_top > el_top) && ( (ac_bottom) < (el_bottom) ) ) || ((ac_top > el_top) && ( (ac_top) < (el_bottom))) || ((ac_bottom < el_bottom) && ( (ac_bottom) > (el_top))) )
+				) ||
+				( ( (ac_top < (el_bottom) ) && (ac_bottom > el_bottom) )
+					&&
+					( ( (ac_left > el_left) && ( (ac_right) < (el_right) ) ) || ((ac_left > el_left) && ( (ac_left) < (el_right))) || ((ac_left < el_left) && ( (ac_right) > (el_left))) )
+				) ||
+				( ( (ac_bottom > el_top) && (ac_bottom < el_bottom) )
+					&&
+					( ( (ac_left > el_left) && ( (ac_right) < (el_right) ) ) || ((ac_left > el_left) && ( (ac_left) < (el_right))) || ((ac_left < el_left) && ( (ac_right) > (el_left))) )
+				)  ||
+				( ( (ac_right > el_left) && (ac_right < el_right) )
+					&&
+					( ( (ac_top > el_top) && ( (ac_bottom) < (el_bottom) ) ) || ((ac_top > el_top) && ( (ac_top) < (el_bottom))) || ((ac_bottom < el_bottom) && ( (ac_bottom) > (el_top))) )
+				) ) 
+				{
+					document.querySelector(".console").style.display = "none";
+					document.querySelector(".game").style.animation = "beacon 3s";
+					document.querySelector("table").style.display = "none";
+					window.setTimeout(function(){
+						document.querySelector(".console3").style.display = "";
+						document.querySelector(".console3").innerHTML = "Nice! You went off the grid in: " + parseInt(time) + " seconds";
+					},3500)
+					
+                    map[37] = true;
+                    x_velocity = 0;
+                    y_velocity = 0;
+					freeze_controls = true;
+				
+					window.setTimeout(function() {
+						location.reload();
+					},10000)
+				}
+			} else {
+				if ( ( (ac_left < ( el_right ) ) && (ac_right > el_right) )
+					&&
+					( ( (ac_top > el_top) && ( (ac_bottom) < (el_bottom) ) ) || ((ac_top > el_top) && ( (ac_top) < (el_bottom))) || ((ac_bottom < el_bottom) && ( (ac_bottom) > (el_top))) )
+				) {
+					x_translation += 2;
+					hit_points -= .05;
+					document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+					document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				}
+
+				if ( ( (ac_top < (el_bottom) ) && (ac_bottom > el_bottom) )
+					&&
+					( ( (ac_left > el_left) && ( (ac_right) < (el_right) ) ) || ((ac_left > el_left) && ( (ac_left) < (el_right))) || ((ac_left < el_left) && ( (ac_right) > (el_left))) )
+				) {
+					y_translation += 2;
+					hit_points -= .05;
+					document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+					document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				}
+
+				if ( ( (ac_bottom > el_top) && (ac_bottom < el_bottom) )
+					&&
+					( ( (ac_left > el_left) && ( (ac_right) < (el_right) ) ) || ((ac_left > el_left) && ( (ac_left) < (el_right))) || ((ac_left < el_left) && ( (ac_right) > (el_left))) )
+				) {
+					y_translation += -2;
+					hit_points -= .05;
+					document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+					document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				}
+
+				if ( ( (ac_right > el_left) && (ac_right < el_right) )
+					&&
+					( ( (ac_top > el_top) && ( (ac_bottom) < (el_bottom) ) ) || ((ac_top > el_top) && ( (ac_top) < (el_bottom))) || ((ac_bottom < el_bottom) && ( (ac_bottom) > (el_top))) )
+				) {
+					x_translation += -2;
+					hit_points -= .05;
+					document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+					document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				}
+			}
+        }
+    }
+
+
+    function actorToBoundaryCollision(){
+
+        var ac_top = document.querySelector(".actor").getBoundingClientRect().top;
+        var ac_bottom = document.querySelector(".actor").getBoundingClientRect().bottom;
+
+        var ac_left = document.querySelector(".actor").getBoundingClientRect().left;
+        var ac_right = document.querySelector(".actor").getBoundingClientRect().right;
+
+        var g_left = document.querySelector(".game").getBoundingClientRect().left;
+        var g_right = document.querySelector(".game").getBoundingClientRect().right;
+        var g_top = document.querySelector(".game").getBoundingClientRect().top;
+        var g_bottom = document.querySelector(".game").getBoundingClientRect().bottom;
+
+        if (g_left >= ac_left){
+            x_translation += 2;
+            hit_points -= .05;
+				document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+        }
+
+        if ( ( Math.abs( (ac_left) - (g_left)) <= 15 ) && ( Math.abs( (ac_bottom) - (g_bottom)) <= 15 ) ) {
+            x_translation += 2;
+            y_translation += -2;
+            hit_points -= .05;
+				document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+        }
+
+        if (g_right <= ac_right){
+            x_translation += -2;
+            hit_points -= .05;
+				document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+        }
+
+
+        if ( ( Math.abs( (ac_right) - (g_right)) <= 15 ) && ( Math.abs( (ac_bottom) - (g_bottom)) <= 15 ) ) {
+            x_translation -= 2;
+            y_translation -= 2;
+            hit_points -= .05;
+				document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+        }
+
+        if (g_top >= ac_top){
+            y_translation += 2;
+            hit_points -= .05;
+				document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+        }
+
+        if ( ( Math.abs( (ac_right) - (g_right)) <= 15 ) && ( Math.abs( (ac_top) - (g_top)) <= 15 ) ) {
+            x_translation += 2;
+            y_translation += 2;
+            hit_points -= .05;
+				document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+        }
+
+        if ( ( Math.abs( (ac_left) - (g_left)) <= 15 ) && ( Math.abs( (ac_top) - (g_top)) <= 15 ) ) {
+            x_translation += 2;
+            y_translation += 2;
+            hit_points -= .05;
+				document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+        }
+
+        if (g_bottom <= ac_bottom){
+            y_translation += -2;
+            hit_points -= .05;
+				document.querySelector(".hit-bar").style.backgroundColor = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+				document.querySelector(".actor").style.color = 'rgba(300,' + parseInt(hit_points*3) + ', 00, 1)';
+        }
+
+    }
+
+
+		function attract_debris(speed, distance) {
+			for (var ctr = 60; ctr <= 91; ctr++) {
+				
+				var el = document.querySelector("#el" + ctr + "");
+				
+				var el_top = el.getBoundingClientRect().top;
+				
+				var el_left = el.getBoundingClientRect().left;
+				
+				var ac = document.querySelector(".actor");
+				
+				var ac_top = ac.getBoundingClientRect().top;
+				
+				var ac_left = ac.getBoundingClientRect().left;
+				
+				if (ctr != 91 && freeze_controls == false){
+					if ( ( (ac_left - el_left < distance) && (ac_left - el_left > 0) ) && ( (ac_top - el_top < distance) && (ac_top - el_top > 0) ) ){
+					    el.style.animation = "blink 1s infinite";
+						rando[ctr].x_translate += speed;
+						rando[ctr].y_translate += speed;
+						elementVelocityX = rando[ctr].x_translate/rando[ctr].y_translate;
+						elementVelocityY = 1;
+						rando[ctr].rotateBy = Math.atan(elementVelocityX/elementVelocityY)*(180/Math.PI);
+					} else if ( ( (el_left- ac_left < distance) && (el_left - ac_left > 0) ) && ( (el_top - ac_top< distance) && (el_top - ac_top > 0) ) ){
+                        el.style.animation = "blink 1s infinite";
+						rando[ctr].x_translate -= speed;
+						rando[ctr].y_translate -= speed;
+						elementVelocityX = rando[ctr].x_translate/rando[ctr].y_translate;
+						elementVelocityY = 1;
+						rando[ctr].rotateBy = Math.atan(elementVelocityX/elementVelocityY)*(180/Math.PI);
+					} else if ( ( (ac_left - el_left < distance) && (ac_left - el_left > 0) ) && ( (el_top - ac_top< distance) && (el_top - ac_top > 0) ) ){
+                        el.style.animation = "blink 1s infinite";
+						rando[ctr].x_translate += speed;
+						rando[ctr].y_translate -= speed;
+						elementVelocityX = rando[ctr].x_translate/rando[ctr].y_translate;
+						elementVelocityY = 1;
+						rando[ctr].rotateBy = Math.atan(elementVelocityX/elementVelocityY)*(180/Math.PI);
+					} else if ( ( (el_left- ac_left < distance) && (el_left - ac_left > 0) ) && ( (ac_top - el_top < distance) && (ac_top - el_top > 0) ) ){
+                        el.style.animation = "blink 1s infinite";
+						rando[ctr].x_translate -= speed;
+						rando[ctr].y_translate += speed;
+						elementVelocityX = rando[ctr].x_translate/rando[ctr].y_translate;
+						elementVelocityY = 1;
+						rando[ctr].rotateBy = Math.atan(elementVelocityX/elementVelocityY)*(180/Math.PI);
+					} else {
+                        el.style.animation = "";
+						if(rando[ctr].x_translate != 0) {
+							if (rando[ctr].x_translate > 0) {
+								rando[ctr].x_translate -= speed;
+							}
+							if (rando[ctr].x_translate < 0) {
+								rando[ctr].x_translate += speed;
+							}
+						}
+						
+						if(rando[ctr].y_translate != 0) {
+							if (rando[ctr].y_translate > 0) {
+								rando[ctr].y_translate -= speed;
+							}
+							if (rando[ctr].y_translate < 0) {
+								rando[ctr].y_translate += speed;
+							}
+						}
+					}
+				}
+
+				if ( (Math.abs(el_left - ac_left) <= 50 ) && (Math.abs(el_top - ac_top) <= 50 )) {
+					if (hit_points > 0) {
+						hit_points -= .01;
+					} 
+				} 
+					
+					el.style.transform = "translate(" + rando[ctr].x_translate + "px, " + rando[ctr].y_translate + "px) rotate(" + rando[ctr].rotateBy + "deg)";
+
+                if (rando[93].neutral == true && rando[94].neutral == true && rando[95].neutral == true && rando[96].neutral == true && rando[97].neutral == true && rando[98].neutral == true && rando[99].neutral == true) {
+					
+					distance = distance*1.1;
+					if (ctr == 91){
+						el.style.backgroundColor = "white";
+						if ( ( ( (ac_left - el_left < distance*.15) && (ac_left - el_left > 0) ) && ( (ac_top - el_top < distance*.15) && (ac_top - el_top > 0) ) ) ||
+						( ( (el_left- ac_left < distance*.15) && (el_left - ac_left > 0) ) && ( (el_top - ac_top< distance*.15) && (el_top - ac_top > 0) ) ) ||
+						( ( (ac_left - el_left < distance*.15) && (ac_left - el_left > 0) ) && ( (el_top - ac_top< distance*.15) && (el_top - ac_top > 0) ) ) ||
+						( ( (el_left- ac_left < distance*.15) && (el_left - ac_left > 0) ) && ( (ac_top - el_top < distance*.15) && (ac_top - el_top > 0) ) ) ) 
+						{
+							document.querySelector(".console").innerHTML = "Grid Gate found";
+							el.style.animation = "beacon .66s infinite";
+						} else {
+							document.querySelector(".console").innerHTML = "";
+							el.style.animation = "";
+						}
+					}
+                }
+			}
+		}
+		
+		function repel_debris(speed, distance) {
+			for (var ctr = 93; ctr <= 99; ctr++) {
+			
+				var ac_top = document.querySelector(".actor").getBoundingClientRect().top;
+				var ac_bottom = document.querySelector(".actor").getBoundingClientRect().bottom;
+				var ac_left = document.querySelector(".actor").getBoundingClientRect().left;
+				var ac_right = document.querySelector(".actor").getBoundingClientRect().right;
+				
+				var el = document.querySelector("#el" + ctr + "");
+				var el_top = el.getBoundingClientRect().top;
+				var el_left = el.getBoundingClientRect().left;
+				var el_right = el.getBoundingClientRect().right;
+				var el_bottom = el.getBoundingClientRect().bottom;
+				
+				var g_left = document.querySelector(".game").getBoundingClientRect().left;
+				var g_right = document.querySelector(".game").getBoundingClientRect().right;
+				var g_top = document.querySelector(".game").getBoundingClientRect().top;
+				var g_bottom = document.querySelector(".game").getBoundingClientRect().bottom;
+
+                if (g_left >= el_left){
+                    rando[ctr].x_translate += 1;
+                }
+
+                if ( ( Math.abs( (el_left) - (g_left)) <= 15 ) && ( Math.abs( (el_bottom) - (g_bottom)) <= 15 ) ) {
+                    rando[ctr].x_translate += 1;
+                    rando[ctr].y_translate += -1;
+                }
+
+                if (g_right <= el_right){
+                    rando[ctr].x_translate += -1;
+                }
+
+                if ( ( Math.abs( (el_right) - (g_right)) <= 15 ) && ( Math.abs( (el_bottom) - (g_bottom)) <= 15 ) ) {
+                    rando[ctr].x_translate += 1;
+                    rando[ctr].y_translate += 1;
+                }
+
+                if (g_top >= el_top){
+                    rando[ctr].y_translate += 1;
+                }
+
+                if ( ( Math.abs( (el_right) - (g_right)) <= 15 ) && ( Math.abs( (el_top) - (g_top)) <= 15 ) ) {
+                    rando[ctr].x_translate += 1;
+                    rando[ctr].y_translate += 1;
+                }
+
+                if ( ( Math.abs( (el_left) - (g_left)) <= 15 ) && ( Math.abs( (el_top) - (g_top)) <= 15 ) ) {
+                    rando[ctr].x_translate += 1;
+                    rando[ctr].y_translate += 1;
+                }
+
+                if (g_bottom <= el_bottom){
+                    rando[ctr].y_translate += -1;
+                }
+				
+				if (rando[ctr].neutral == false) {
+					if ( ( (ac_left - el_left < distance) && (ac_left - el_left > 0) ) && ( (ac_top - el_top < distance) && (ac_top - el_top > 0) ) ){
+						rando[ctr].x_translate -= speed;
+						rando[ctr].y_translate -= speed;
+
+						elementVelocityX = rando[ctr].x_translate/rando[ctr].y_translate;
+						elementVelocityY = 1;
+						rando[ctr].rotateBy = Math.atan(elementVelocityX/elementVelocityY)*(180/Math.PI);
+					} else if ( ( (el_left- ac_left < distance) && (el_left - ac_left > 0) ) && ( (el_top - ac_top< distance) && (el_top - ac_top > 0) ) ){
+						rando[ctr].x_translate += speed;
+						rando[ctr].y_translate += speed;
+
+						elementVelocityX = rando[ctr].x_translate/rando[ctr].y_translate;
+						elementVelocityY = 1;
+						rando[ctr].rotateBy = Math.atan(elementVelocityX/elementVelocityY)*(180/Math.PI);
+					} else if ( ( (ac_left - el_left < distance) && (ac_left - el_left > 0) ) && ( (el_top - ac_top< distance) && (el_top - ac_top > 0) ) ){
+						rando[ctr].x_translate -= speed;
+						rando[ctr].y_translate += speed;
+
+						elementVelocityX = rando[ctr].x_translate/rando[ctr].y_translate;
+						elementVelocityY = 1;
+						rando[ctr].rotateBy = Math.atan(elementVelocityX/elementVelocityY)*(180/Math.PI);						
+					} else if ( ( (el_left- ac_left < distance) && (el_left - ac_left > 0) ) && ( (ac_top - el_top < distance) && (ac_top - el_top > 0) ) ){
+						rando[ctr].x_translate += speed;
+						rando[ctr].y_translate -= speed;
+
+						elementVelocityX = rando[ctr].x_translate/rando[ctr].y_translate;
+						elementVelocityY = 1;
+						rando[ctr].rotateBy = Math.atan(elementVelocityX/elementVelocityY)*(180/Math.PI);						
+					} else {
+						if(caught !=0) {
+                            if (rando[caught].x_translate != 0) {
+                                if (rando[caught].x_translate > 0) {
+                                    rando[caught].x_translate -= speed;
+                                }
+                                if (rando[caught].x_translate < 0) {
+                                    rando[caught].x_translate += speed;
+                                }
+                            }
+
+                            if (rando[caught].y_translate != 0) {
+                                if (rando[caught].y_translate > 0) {
+                                    rando[caught].y_translate -= speed;
+                                }
+                                if (rando[caught].y_translate < 0) {
+                                    rando[caught].y_translate += speed;
+                                }
+                            }
+                            document.querySelector("#el" + caught + "").style.transform = "translate(" + rando[caught].x_translate + "px, " + rando[caught].y_translate + "px)";
+                        }
+					}
+					
+					el.style.transform = "translate(" + rando[ctr].x_translate + "px, " + rando[ctr].y_translate + "px) rotate(" + rando[ctr].rotateBy*-1 + "deg)";
+
+				}
+				
+				if (rando[ctr].neutral == false) {
+					if ( ( ( (ac_left - el_left < distance*5) && (ac_left - el_left > 0) ) && ( (ac_top - el_top < distance*4) && (ac_top - el_top > 0) ) ) ||
+						( ( (el_left- ac_left < distance*5) && (el_left - ac_left > 0) ) && ( (el_top - ac_top< distance*4) && (el_top - ac_top > 0) ) ) ||
+						( ( (ac_left - el_left < distance*5) && (ac_left - el_left > 0) ) && ( (el_top - ac_top< distance*4) && (el_top - ac_top > 0) ) ) ||
+						( ( (el_left- ac_left < distance*5) && (el_left - ac_left > 0) ) && ( (ac_top - el_top < distance*4) && (ac_top - el_top > 0) ) ) )
+						{
+							el.style.animation = "blink .33s infinite";
+
+					} else {
+						el.style.animation = "";
+
+					}
+				}
+
+				
+				if (((Math.abs(el_left - ac_left) <= 40 ) && (Math.abs(el_top - ac_top) <= 40 )) && (rando[ctr].neutral == false)) {
+					hit_points = 99;
+					document.querySelector(".console").innerHTML = "<span style='color:" + rando[ctr].color + "'>" + rando[ctr].color + "</span>" + " beacon captured <br />";
+					window.setTimeout(function(){
+						document.querySelector(".console").innerHTML = "";
+					}, 5000);
+
+                    positionUponMeetingX = x_translation - rando[ctr].x_translate;
+                    positionUponMeetingY = y_translation - rando[ctr].y_translate;
+
+					// speedCoefficient += .05;
+                    caught = ctr;
+                    rando[ctr].neutral = true;
+					el.style.animation = "";
+					speedCoefficient += .1;
+					document.querySelector("#el" + ctr + "").style.opacity = "1";
+					document.querySelector("#b" + ctr).style.opacity = 1;
+					
+				}
+
+				if (ctr == caught) {
+					document.querySelector(".console2").style.animation = "blink 1s";
+                    el.style.animation = "";
+					document.querySelector("#el" + ctr + "").style.backgroundColor = "black";
+					document.querySelector("#el" + ctr + "").style.color = "black";
+				}
+			}
+		}
+	
+	function game() {
+
+		tableCreate();
+		window.setInterval(function(){
+			go();
+			actorToBoundaryCollision();
+			actorToElementCollision(document.querySelector(".actor"));
+			attract_debris(.25, 250);
+			repel_debris(.6, 135);
+		},10);
+	}
+		
+	window.addEventListener("load", function() {
+		document.querySelector(".console3").style.display = "none";
+		document.querySelector(".console3").style.left = "15%";
+		document.querySelector(".console3").style.bottom = "20%";
+		window.setTimeout(function(){
+			document.querySelector(".console3").innerHTML = "You have been transported to the Grid";
+			document.querySelector(".console3").style.display = "";
+		}, 1000);
+		window.setTimeout(function(){
+			document.querySelector(".console3").innerHTML = "The only way to get off the grid is to capture the following:";
+		}, 5000);
+		window.setTimeout(function(){
+			document.querySelector(".console3").innerHTML += "</br></br><span style='color: red;background-color: red'>aa</span><span style='color: orange;background-color: orange'>aa</span><span style='color: yellow;background-color: yellow'>aa</span><span style='color: green;background-color: green'>aa</span><span style='color: blue;background-color: blue'>aa</span><span style='color: indigo;background-color: indigo'>aa</span><span style='color: violet;background-color: violet'>aa</span>";
+		}, 7000);
+		window.setTimeout(function(){
+			document.querySelector(".console3").innerHTML = "These are the beacons that should allow you to locate the";
+		}, 10000);
+		window.setTimeout(function(){
+			document.querySelector(".console3").innerHTML += "<br/><br/><span style='animation: beacon 1s infinite; color = white'><span style='visibility:hidden'>Grid<br/>Gate</span></span><br/><br/>Grid Gate";
+		}, 12000);
+		window.setTimeout(function(){
+			document.querySelector(".console3").innerHTML = "Use the arrow keys, WASD or both to navigate the Grid";
+		}, 17000);
+		window.setTimeout(function(){
+			document.querySelector(".console3").style.display = "none";
+		}, 21000);
+        game();
+	}, false);
+	
+		
+</script>
