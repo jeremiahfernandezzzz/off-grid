@@ -961,27 +961,30 @@
 		document.querySelector(".console3").style.left = "15%";
 		document.querySelector(".console3").style.bottom = "20%";
 		window.setTimeout(function(){
-			document.querySelector(".console3").innerHTML = "You have been transported to the Grid";
+			document.querySelector(".console3").innerHTML = "You have been transported to the Grid.";
 			document.querySelector(".console3").style.display = "";
 		}, 1000);
 		window.setTimeout(function(){
-			document.querySelector(".console3").innerHTML = "The only way to get off the grid is to capture the following:";
+			document.querySelector(".console3").innerHTML = "The only way to get off the Grid is to capture the following:";
 		}, 5000);
 		window.setTimeout(function(){
-			document.querySelector(".console3").innerHTML += "</br></br><span style='color: red;background-color: red'>aa</span><span style='color: orange;background-color: orange'>aa</span><span style='color: yellow;background-color: yellow'>aa</span><span style='color: green;background-color: green'>aa</span><span style='color: blue;background-color: blue'>aa</span><span style='color: indigo;background-color: indigo'>aa</span><span style='color: violet;background-color: violet'>aa</span>";
+			document.querySelector(".console3").innerHTML += "</br></br><span style='animation: blink 1s infinite'><span style='color: red;background-color: red'>aa</span> <span style='color: orange;background-color: orange'>aa</span> <span style='color: yellow;background-color: yellow'>aa</span> <span style='color: green;background-color: green'>aa</span> <span style='color: blue;background-color: blue'>aa</span> <span style='color: indigo;background-color: indigo'>aa</span> <span style='color: violet;background-color: violet'>aa</span></span>";
 		}, 7000);
 		window.setTimeout(function(){
-			document.querySelector(".console3").innerHTML = "These are the beacons that should allow you to locate the";
-		}, 10000);
-		window.setTimeout(function(){
-			document.querySelector(".console3").innerHTML += "<br/><br/><span style='animation: beacon 1s infinite; color = white'><span style='visibility:hidden'>Grid<br/>Gate</span></span><br/><br/>Grid Gate";
+			document.querySelector(".console3").innerHTML = "Those are the <strong>beacons</strong> that should allow you to locate the";
 		}, 12000);
 		window.setTimeout(function(){
-			document.querySelector(".console3").innerHTML = "Use the arrow keys, WASD or both to navigate the Grid";
-		}, 17000);
+			document.querySelector(".console3").innerHTML += "<br/><br/><span style='animation: beacon 1s infinite; color = white'><span style='visibility:hidden'>Grid<br/>Gate</span></span><br/><br/>Grid Gate";
+		}, 14000);
+        window.setTimeout(function(){
+            document.querySelector(".console3").innerHTML += ", a.k.a. the way out.";
+        }, 17000);
+		window.setTimeout(function(){
+			document.querySelector(".console3").innerHTML = "Use the arrow keys/WASD [or both] to navigate the Grid";
+		}, 20000);
 		window.setTimeout(function(){
 			document.querySelector(".console3").style.display = "none";
-		}, 21000);
+		}, 24000);
         game();
 	}, false);
 	
