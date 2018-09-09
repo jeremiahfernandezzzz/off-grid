@@ -1,2 +1,3 @@
-# raiderofthelostgems
-js13k 2017 Entry
+# off-grid
+js13kgames 2018 entry
+built upon my previous entry (raiderofthelostgems)
