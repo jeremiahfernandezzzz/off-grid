@@ -3,7 +3,7 @@
 	<head>
 		<link rel="icon" type="image/png" href="favicon.ico" sizes="16x16">  
 		<meta content='maximum-scale=1.0, user-scalable=0' name='viewport' />-
-		<title>Off grid</title>
+		<title>off-grid</title>
 	</head>
 	<body>
 
@@ -778,7 +778,7 @@
 						( ( (ac_left - el_left < distance*.15) && (ac_left - el_left > 0) ) && ( (el_top - ac_top< distance*.15) && (el_top - ac_top > 0) ) ) ||
 						( ( (el_left- ac_left < distance*.15) && (el_left - ac_left > 0) ) && ( (ac_top - el_top < distance*.15) && (ac_top - el_top > 0) ) ) ) 
 						{
-							document.querySelector(".console").innerHTML = "Grid Gate found";
+							document.querySelector(".console").innerHTML = "Grid Gate nearby";
 							el.style.animation = "beacon .66s infinite";
 						} else {
 							document.querySelector(".console").innerHTML = "";
