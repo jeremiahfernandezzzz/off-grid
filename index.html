@@ -28,9 +28,6 @@
 		</div>
 		<div class="console1"></div>
 		<div class="console3"></div>
-		
-		<div class="mobile left"></div>
-		<div class="mobile right"></div>
 	</body>
 </html>
 <style>
@@ -73,20 +70,6 @@
 	@font-face {
 		font-family: "Hexagon";
 		src: url("Hexagon.ttf");
-	}
-	
-	.mobile {
-		position: absolute;
-		width: 40%;
-		height : 100%;
-	}
-	
-	.left {
-		left: 0%;
-	}
-	
-	.right {
-		right: 0%;
 	}
 
 	body {
@@ -194,22 +177,7 @@
 		opacity: .5;
 		border: solid 1px;
 	}
-	
-	.sample-element {
-		position: relative;
-		color: #C9A957;
-		background: rgba(255, 255, 255, 0.15);
-		font-family: "lucida console";
-		font-size: 20pt;
-		height: 40px;
-		width: 80px;
-		opacity: .5;
-	}
-	
-	.arrow {
-		position: absolute;
-		color: yellow;
-	}
+
 	
 	.actor {
 		position: absolute;
@@ -273,9 +241,7 @@
 	var speedCoefficient = 1;
 	var caught = 0;
 	var hit_points = 99;
-	
-	var touchleft = false;
-	var touchright = false;
+
 	var positionUponMeetingX = 0;
 	var positionUponMeetingY = 0;
 	
@@ -311,12 +277,12 @@
 				}
 			}
 		}
-		
-		
+
+
 		x_velocity = speedCoefficient*(Math.cos( (90-angle)/(180/Math.PI) ));
 		y_velocity = speedCoefficient*(Math.cos(angle/(180/Math.PI)));
-		document.querySelector(".actor .rotator").style.transform = "rotate(" + angle*-1 + "deg)";
-		document.querySelector(".actor").style.transform = "translate(" + x_translation + "px, " + y_translation + "px)";
+		document.querySelector(".actor .rotator").style.transform = "rotate3d(0,0,1," + angle*-1 + "deg)";
+		document.querySelector(".actor").style.transform = "translate3d(" + x_translation + "px, " + y_translation + "px, 0px)";
 		document.querySelector(".game").style.transformOrigin = (x_translation-50)*1.3 + "px " + (y_translation+700)*1.3 + "px";
 		document.querySelector(".hit-points").innerHTML = "<span style='font-size:10pt;'>fuel<br/></span>" + Math.round(hit_points);
 		if (Math.round(hit_points) < 30) {
@@ -771,7 +737,7 @@
 					} 
 				} 
 					
-					el.style.transform = "translate(" + rando[ctr].x_translate + "px, " + rando[ctr].y_translate + "px) rotate(" + rando[ctr].rotateBy + "deg)";
+					el.style.transform = "translate3d(" + rando[ctr].x_translate + "px, " + rando[ctr].y_translate + "px, 0px) rotate3d(0,0,1," + rando[ctr].rotateBy + "deg)";
 
                 if (rando[93].neutral == true && rando[94].neutral == true && rando[95].neutral == true && rando[96].neutral == true && rando[97].neutral == true && rando[98].neutral == true && rando[99].neutral == true) {
 					
@@ -783,10 +749,12 @@
 						( ( (ac_left - el_left < distance*.15) && (ac_left - el_left > 0) ) && ( (el_top - ac_top< distance*.15) && (el_top - ac_top > 0) ) ) ||
 						( ( (el_left- ac_left < distance*.15) && (el_left - ac_left > 0) ) && ( (ac_top - el_top < distance*.15) && (ac_top - el_top > 0) ) ) ) 
 						{
-							document.querySelector(".console").innerHTML = "Grid Gate nearby";
+							document.querySelector(".console").innerHTML = "Grid<br/>Gate<br/>nearby";
 							el.style.animation = "beacon .66s infinite";
+							document.querySelector(".console").style.animation = "blink .5s infinite";
 						} else {
-							document.querySelector(".console").innerHTML = "";
+							document.querySelector(".console").style.animation = "blink 2s infinite";
+							document.querySelector(".console").innerHTML = "Grid<br/>Gate<br/>open";
 							el.style.animation = "";
 						}
 					}
@@ -897,11 +865,11 @@
                                     rando[caught].y_translate += speed;
                                 }
                             }
-                            document.querySelector("#el" + caught + "").style.transform = "translate(" + rando[caught].x_translate + "px, " + rando[caught].y_translate + "px)";
+                            document.querySelector("#el" + caught + "").style.transform = "translate3d(" + rando[caught].x_translate + "px, " + rando[caught].y_translate + "px, 0px)";
                         }
 					}
 					
-					el.style.transform = "translate(" + rando[ctr].x_translate + "px, " + rando[ctr].y_translate + "px) rotate(" + rando[ctr].rotateBy*-1 + "deg)";
+					el.style.transform = "translate3d(" + rando[ctr].x_translate + "px, " + rando[ctr].y_translate + "px, 0px) rotate3d(0,0,1," + rando[ctr].rotateBy*-1 + "deg)";
 
 				}
 				
@@ -985,9 +953,10 @@
             document.querySelector(".console3").innerHTML += ", a.k.a. the way out.";
         }, 17000);
 		window.setTimeout(function(){
-			document.querySelector(".console3").innerHTML = "Use the arrow keys/WASD [or both] to navigate the Grid";
+			document.querySelector(".console3").innerHTML = "Use the arrow keys/WASD [or <em>both</em>] to navigate the Grid";
 		}, 20000);
 		window.setTimeout(function(){
+			document.querySelector(".console3").innerHTML = "";
 			document.querySelector(".console3").style.display = "none";
 		}, 24000);
         game();
